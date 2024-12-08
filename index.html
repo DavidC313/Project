@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-2nzfWPc8bFnAPuL8wvZdEe5Yx0lLncWpxOdJGHwFfT5JpZG+FZRwTtwKiXgMykt+" crossorigin="anonymous">
     <!-- Tone.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.37/Tone.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to the custom CSS file -->
 </head>
 
 <body class="bg-light">
@@ -27,6 +27,125 @@
         <div class="header text-center mb-5">
             <h1 class="text-primary">Virtual Instrument Collaborative Jamming</h1>
             <p class="lead text-muted">Create music together with Guitar, Bass, and Drums - Play, Record, Loop, and Customize Effects.</p>
+        </div>
+
+        <!-- Controls & Visualization Section -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="controls">
+                    <!-- Guitar Section -->
+                    <div class="instrument-controls card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title text-secondary">🎸 Guitar</h2>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="guitarType" class="form-label">Select Guitar Type</label>
+                                    <select id="guitarType" class="form-select" onchange="customizeGuitar()">
+                                        <option value="electric">Electric Guitar</option>
+                                        <option value="acoustic">Acoustic Guitar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="btn-group mb-3">
+                                <button class="btn btn-primary" onclick="playGuitar()">Play</button>
+                                <button class="btn btn-success" onclick="startRecording('guitar')">Record</button>
+                                <button class="btn btn-warning" onclick="loopRecording('guitar')">Loop</button>
+                                <button class="btn btn-danger" onclick="stopRecording('guitar')">Stop</button>
+                            </div>
+                            <div class="btn-group mb-3">
+                                <button class="btn btn-secondary" onclick="downloadRecording('guitar')">Download</button>
+                                <button class="btn btn-info" onclick="playBack('guitar')">Play Recording</button>
+                            </div>
+                            <label for="guitarVolume" class="form-label">Volume</label>
+                            <input type="range" class="form-range" min="0" max="1" step="0.01" value="1" id="guitarVolume">
+                            <label for="guitarEffect" class="form-label mt-2">Effects</label>
+                            <select id="guitarEffect" class="form-select" onchange="applyEffect('guitar')">
+                                <option value="none">None</option>
+                                <option value="chorus">Chorus</option>
+                                <option value="distortion">Distortion</option>
+                                <option value="phaser">Phaser</option>
+                            </select>
+                            <div id="guitarStatus" class="text-muted mt-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Bass Section -->
+                    <div class="instrument-controls card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title text-secondary">🎵 Bass</h2>
+                            <div class="btn-group mb-3">
+                                <button class="btn btn-primary" onclick="playBass()">Play</button>
+                                <button class="btn btn-success" onclick="startRecording('bass')">Record</button>
+                                <button class="btn btn-warning" onclick="loopRecording('bass')">Loop</button>
+                                <button class="btn btn-danger" onclick="stopRecording('bass')">Stop</button>
+                            </div>
+                            <div class="btn-group mb-3">
+                                <button class="btn btn-secondary" onclick="downloadRecording('bass')">Download</button>
+                                <button class="btn btn-info" onclick="playBack('bass')">Play Recording</button>
+                            </div>
+                            <label for="bassVolume" class="form-label">Volume</label>
+                            <input type="range" class="form-range" min="0" max="1" step="0.01" value="1" id="bassVolume">
+                            <label for="bassEffect" class="form-label mt-2">Effects</label>
+                            <select id="bassEffect" class="form-select" onchange="applyEffect('bass')">
+                                <option value="none">None</option>
+                                <option value="chorus">Chorus</option>
+                                <option value="distortion">Distortion</option>
+                                <option value="phaser">Phaser</option>
+                            </select>
+                            <div id="bassStatus" class="text-muted mt-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Drums Section -->
+                    <div class="instrument-controls card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h2 class="card-title text-secondary">🥁 Drums</h2>
+                            <div class="btn-group mb-3">
+                                <button class="btn btn-primary" onclick="playDrums()">Play</button>
+                                <button class="btn btn-success" onclick="startRecording('drums')">Record</button>
+                                <button class="btn btn-warning" onclick="loopRecording('drums')">Loop</button>
+                                <button class="btn btn-danger" onclick="stopRecording('drums')">Stop</button>
+                            </div>
+                            <div class="btn-group mb-3">
+                                <button class="btn btn-secondary" onclick="downloadRecording('drums')">Download</button>
+                                <button class="btn btn-info" onclick="playBack('drums')">Play Recording</button>
+                            </div>
+                            <label for="drumsVolume" class="form-label">Volume</label>
+                            <input type="range" class="form-range" min="0" max="1" step="0.01" value="1" id="drumsVolume">
+                            <label for="drumsEffect" class="form-label mt-2">Effects</label>
+                            <select id="drumsEffect" class="form-select" onchange="applyEffect('drums')">
+                                <option value="none">None</option>
+                                <option value="chorus">Chorus</option>
+                                <option value="distortion">Distortion</option>
+                                <option value="phaser">Phaser</option>
+                            </select>
+                            <div id="drumsStatus" class="text-muted mt-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualization Section -->
+            <div class="col-md-4">
+                <div class="visualization">
+                    <h2 class="card-title text-secondary">📊 Audio Visualization</h2>
+                    <canvas id="audioVisualizer" width="600" height="200" class="border"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer text-center mt-5">
+            <h2 class="card-title text-secondary">🎛 Playback Controls</h2>
+            <button class="btn btn-warning" onclick="playAllInstruments()">Play All</button>
+            <button class="btn btn-info mt-3" onclick="loopAllInstruments()">Loop All</button>
+            <button class="btn btn-danger mt-3" onclick="stopAllInstruments()">Stop All</button>
+            <div class="form-check mt-3">
+                <input class="form-check-input" type="checkbox" id="metronomeToggle" onclick="toggleMetronome(this.checked)">
+                <label class="form-check-label" for="metronomeToggle">Enable Metronome</label>
+            </div>
+            <label for="tempoControl" class="form-label mt-2">Tempo (BPM)</label>
+            <input type="number" class="form-control w-25" id="tempoControl" value="120" min="60" max="200">
         </div>
 
     </div>

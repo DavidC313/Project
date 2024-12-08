@@ -1,0 +1,178 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Page Layout */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f4f4f9;
+    color: #333;
+    height: 100vh;
+    justify-content: center;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.header p {
+    font-size: 1.25rem;
+    color: #ecf0f1;
+    margin-bottom: 0;
+}
+
+/* Flexbox Layout for Controls and Visualization */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.instrument-controls {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    background: #eaeaea;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.instrument-controls h2 {
+    margin-bottom: 15px;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+.instrument-controls button,
+.instrument-controls select,
+.instrument-controls input {
+    margin: 8px 0;
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.instrument-controls button {
+    background-color: #3498db;
+    color: #fff;
+    cursor: pointer;
+}
+
+.instrument-controls button:hover {
+    background-color: #2980b9;
+}
+
+/* Visualization Section */
+.visualization {
+    margin: 20px auto;
+    text-align: center;
+}
+
+#audioVisualizer {
+    width: 100%;
+    height: 250px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    background: #222;
+}
+
+/* Footer Styling */
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.footer button {
+    margin: 5px;
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.footer button:hover {
+    background: #555;
+}
+
+.footer .form-check-label {
+    color: #333;
+}
+
+.footer input[type="number"] {
+    width: 100px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .instrument-controls {
+        min-width: 100%;
+    }
+
+    #audioVisualizer {
+        height: 200px;
+    }
+
+    .footer input[type="number"] {
+        width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .instrument-controls button,
+    .instrument-controls select,
+    .instrument-controls input {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .footer input[type="number"] {
+        width: 60px;
+    }
+}
